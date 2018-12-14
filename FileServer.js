@@ -28,11 +28,12 @@ http.createServer(function (request, response) {
 
     switch (request.url) {
         case '/register':
+            console.log("in register case");
             response.writeHead(200, { 'Content-type': 'application/json' });
             request.on('data', (data) => {
                 let registerData = JSON.parse(data)
                 let resultset = db.insertStatement(registerData, function (result) {
-                    console.log("hhhhhhhhhhhh" + result);
+                    response.write("Registration Successful!!!");
                     response.end();
                 });
 
