@@ -1,0 +1,22 @@
+{
+  "name": "newspoint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DBConnection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gayatriuparate/NewsPoint.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gayatriuparate/NewsPoint/issues"
+  },
+  "homepage": "https://github.com/Gayatriuparate/NewsPoint#readme",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+}
