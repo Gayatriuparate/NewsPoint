@@ -27,4 +27,11 @@ let selectStatement = (email, cb) => {
         cb(result);
     });
 };
+let selectStatement = (username, cb) => {
+    var sql = `select password from user_info where username='${username}'`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        cb(result);
+    });
+};
 module.exports = { insertStatement, selectStatement };
