@@ -28,4 +28,12 @@ let selectStatement = (email, cb) => {
         cb(result);
     });
 };
-module.exports = { insertStatement, selectStatement };
+
+let insertBlog = (data) => {
+    var sql = `INSERT INTO blog_posts values(null, '${data.userNm}','${data.title}','${data.blogDesc}')`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Blog Posted !!");
+    });
+};
+module.exports = { insertStatement, selectStatement, insertBlog };
