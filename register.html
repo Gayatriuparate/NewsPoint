@@ -50,43 +50,59 @@
             <hr>
             <div class="setField">
                 <label for="username"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="username" required>
+                <input type="text" placeholder="Enter Name" id="username" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" id="psw" required>
 
                 <label for="psw_repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw_repeat" required>
+                <input type="password" placeholder="Repeat Password" id="psw_repeat" required>
 
                 <label for="email_id"><b>Enter email-id</b></label>
-                <input type="text" placeholder="Enter email-id" name="email_id" required>
+                <input type="text" placeholder="Enter email-id" id="email_id" required>
 
                 <label for="mob_no"><b>Enter mobile number</b></label>
-                <input type="text" placeholder="Enter mobile number" name="mob_no" required>
+                <input type="text" placeholder="Enter mobile number" id="mob_no" required>
 
                 <label for="edu"><b>Enter Qualification</b></label>
-                <input type="text" placeholder="Enter Qualification" name="edu" required>
+                <input type="text" placeholder="Enter Qualification" id="edu" required>
                 <hr>
             </div>
 
-            <button type="submit" class="registerbtn">Register</button>
+            <input type="button" class="registerbtn" value="Register" onclick="validate();">
 
             <div class="signin">
-                <p>Already have an account? <a href="#">Sign in</a>.</p>
+                <p>Already have an account? <a href="login.html">Sign in</a>.</p>
             </div>
         </div>
     </form>
-<script>
- function validate(){
-        // username=document.getElementById("username");
-        // password=document.getElementById("password");
-        // psw_repeat=document.getElementById("psw-repeat");
-        // email_id=document.getElementById("email_id");
-        // mob_no=document.getElementById("mob-no");
-        // edu=document.getElementById("edu");
-    }
-</script>
-   
+    <script>
+        function validate() {
+            username = document.getElementById("username");
+            password = document.getElementById("password");
+            psw_repeat = document.getElementById("psw-repeat");
+            email_id = document.getElementById("email_id");
+            mob_no = document.getElementById("mob-no");
+            edu = document.getElementById("edu");
+
+            var oReq = new XMLHttpRequest();
+            oReq.open('POST', '/register', true);
+
+
+            oReq.setRequestHeader('Content-type', 'multipart/form-data');
+            let params = { username: username.value, password: password.value, email_id: email_id.value, mob: mob_no.value, edu: edu.value }
+            alert(params);
+            oReq.onreadystatechange = function () {//Call a function when the state changes.
+                if (oReq.readyState == 4 && oReq.status == 200) {
+                    alert(oReq.responseText);
+                }
+                oReq.send(JSON.stringify(params));
+
+            }
+
+        }
+    </script>
+
 </body>
 
 </html>

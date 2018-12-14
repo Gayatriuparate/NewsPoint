@@ -44,6 +44,12 @@
             background-image: radial-gradient(gray, whitesmoke);
             font-size: 2em;
         }
+        .signin {
+           
+            padding: 1% 4% 1% 4%;
+            margin: 0% 0% 0% 45%;
+            font-size:20px;
+        }
     </style>
 </head>
 
@@ -56,6 +62,10 @@
             <label for="password">Password: </label> <input type="password" name="password" id="password" required>
             <br>
             <input type="button" value="Log In" onclick="validate();">
+            <br>
+            <div class="signin">
+                <p>New User? <a href="register.html">Register Here</a>.</p>
+            </div>
         </fieldset>
     </form>
     <script type="text/javascript">
