@@ -1,6 +1,6 @@
 var http = require('http');
 var fs = require('fs');
-var mysql = require('./DBConnection');
+const db = require('./DBConnection');
 
 const getResponse = (response, contentType, fileURL) => {
     response.writeHead(200, { 'Content-type': contentType });
@@ -14,30 +14,7 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
-
     switch (request.url) {
-        case '/?': response.writeHead(200, { 'Content-type': 'text/javascript' });
-            db.selectStatement(queryData.username, (result) => {
-                if (queryData.password == result) {
-                    response.redirect('www.google.com');
-                }
-            });
-            break;
-        case '/new.css': response.writeHead(200, { 'Content-type': 'text/css' });
-            fs.readFile('./new.css', (err, html) => {
-                if (err) {
-                    throw err;
-                }
-                response.write(html);
-                response.end();
-            });
-            break;
-        case '/event_data': request.on('data', (data) => {
-            const dataObj = JSON.parse(data);
-            mysql.insert(dataObj);
-
-        });
-            break;
         case '/user_info':
             console.log("in case 1");
             response.writeHead(200, { 'Content-type': 'application/json' });
@@ -46,13 +23,24 @@ http.createServer(function (request, response) {
             });
             response.end();
             break;
-        default: response.writeHead(200, { 'Content-type': 'text/html' });
-            fs.readFile('./login.html', (err, html) => {
-                if (err) {
-                    throw err;
-                }
-                response.write(html);
-                response.end();
+        case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            console.log(request.url);
+            request.on('data', (data) => {
+                let queryData = JSON.parse(data);
+                db.selectStatement(queryData.username, (result) => {
+                    let pass = result[0].password;
+                    let res = "";
+                    if (queryData.password.toString() == pass) {
+                        res = "success";
+                    } else {
+                        res = "Failed";
+                    }
+                    response.write(res);
+                    response.end();
+
+                });
             });
+            break;
+        default: getResponse(response, 'text/html', './login.html');
     }
 }).listen(8080);

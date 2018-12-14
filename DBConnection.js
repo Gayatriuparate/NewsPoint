@@ -1,4 +1,3 @@
-
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -22,7 +21,6 @@ let insertStatement = () => {
 };
 
 let selectStatement = (email, cb) => {
-
     var sql = `select password from user_info where email_id='${email}'`;
     con.query(sql, function (err, result) {
         if (err) throw err;
