@@ -47,4 +47,4 @@ let insertBlog = () => {
         console.log("Blog Posted !!");
     });
 };
-module.exports = { insertStatement, selectStatement, insertBlog,selectUsername,selectMobileNo, selectEducation };
+module.exports = { insertStatement, selectStatement, insertBlog,selectProfile };
