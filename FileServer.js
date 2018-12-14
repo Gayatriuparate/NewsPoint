@@ -14,45 +14,15 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
-    let fileName = './login.html'
-    let filetype = 'text/html'
-    if (request.url.includes(".html")) {
-        fileName = `.${request.url}`;
-    } else if (request.url.includes(".css")) {
-        fileName = `.${request.url}`;
-        filetype = 'text/css';
-    } else if (request.url.includes(".js")) {
-        fileName = `.${request.url}`;
-        filetype = 'text/javascript';
-    }
-
     switch (request.url) {
-        case '/register':
-            console.log("in register case");
+        case '/user_info':
+            console.log("in case 1");
             response.writeHead(200, { 'Content-type': 'application/json' });
-            request.on('data', (data) => {
-                let registerData = JSON.parse(data)
-                let resultset = db.insertStatement(registerData, function (result) {
-                    response.write("Registration Successful!!!");
-                    response.end();
-                });
-
-            });
-            break;
-
-        case '/blogReq':
-            console.log("in case timeline HTML.");
-            response.writeHead(200, { 'Content-type': 'application/html' });
-            request.on('data', (data) => {
-                let registerData = JSON.parse(data)
-                let resultset = db.insertBlog(registerData, function (result) {
-                    console.log("inserted!!!!!" + result);
-                });
+            let resultset = mysql.selectStatement('piya@gmail.com', function (result) {
+                console.log("hhhhhhhhhhhh" + result);
             });
             response.end();
             break;
-
-
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
@@ -66,6 +36,17 @@ http.createServer(function (request, response) {
                         }
                     }
                     response.write(res);
+                    response.end();
+
+                });
+            });
+
+            case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            console.log(request.url);
+            request.on('data', (data) => {
+                db.selectStatement(queryData.username, (result) => {
+                    let results=JSON.stringify(result);
+                    response.write(results);
                     response.end();
 
                 });

@@ -18,7 +18,7 @@
 --
 -- Table structure for table `user_info`
 --
-
+create database blog_db;
 DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;

@@ -36,4 +36,4 @@ let insertBlog = (data) => {
         console.log("Blog Posted !!");
     });
 };
-module.exports = { insertStatement, selectStatement, insertBlog };
+module.exports = { insertStatement, selectStatement, insertBlog,selectProfile };
