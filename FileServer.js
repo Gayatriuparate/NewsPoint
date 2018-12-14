@@ -15,9 +15,17 @@ const getResponse = (response, contentType, fileURL) => {
 
 http.createServer(function (request, response) {
     let fileName = './login.html'
+    let filetype = 'text/html'
     if (request.url.includes(".html")) {
         fileName = `.${request.url}`;
+    } else if (request.url.includes(".css")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/css';
+    } else if (request.url.includes(".js")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/javascript';
     }
+
     switch (request.url) {
         case '/register':
             response.writeHead(200, { 'Content-type': 'application/json' });
@@ -31,16 +39,19 @@ http.createServer(function (request, response) {
             });
             break;
 
-            case '/blogReq':
+        case '/blogReq':
             console.log("in case timeline HTML.");
             response.writeHead(200, { 'Content-type': 'application/html' });
-            let resultset = mysql.insertBlog(function (result) {
-                console.log("inserted!!!!!" + result);
+            request.on('data', (data) => {
+                let registerData = JSON.parse(data)
+                let resultset = db.insertBlog(registerData, function (result) {
+                    console.log("inserted!!!!!" + result);
+                });
             });
             response.end();
             break;
 
-    
+
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
@@ -61,6 +72,6 @@ http.createServer(function (request, response) {
             break;
         default:
             console.log(fileName);
-            getResponse(response, 'text/html', fileName);
+            getResponse(response, filetype, fileName);
     }
 }).listen(8080);

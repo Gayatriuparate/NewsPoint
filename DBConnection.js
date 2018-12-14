@@ -29,8 +29,8 @@ let selectStatement = (email, cb) => {
     });
 };
 
-let insertBlog = () => {
-    var sql = `INSERT INTO blog_posts values(null, '${userNm}','${title}','${blogDesc}')`;
+let insertBlog = (data) => {
+    var sql = `INSERT INTO blog_posts values(null, '${data.userNm}','${data.title}','${data.blogDesc}')`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log("Blog Posted !!");
