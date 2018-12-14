@@ -1,23 +1,28 @@
 var http = require('http');
 var fs = require('fs');
-var url = require('url');
-const db=require('./DBConnection');
+//var url = require('url');
+const db = require('./DBConnection');
 
 
 http.createServer(function (request, response) {
-    let queryData = "";
-    let stringUrl = request.url.toString();
-    if (stringUrl.includes('?')) {
-        queryData = url.parse(request.url, true).query;
-        stringUrl = '/?'
-    }
-    // console.log(queryData.username);
-    switch (stringUrl) {
-        case '/?': response.writeHead(200, { 'Content-type': 'text/javascript' });
-            db.selectStatement(queryData.username,(result)=>{
-                if(queryData.password==result){
-                response.redirect('www.google.com');
-                }
+    switch (request.url) {
+        case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            console.log(request.url);
+            request.on('data', (data) => {
+                let queryData = JSON.parse(data);
+
+                db.selectStatement(queryData.username, (result) => {
+                    let pass=result[0].password;
+                    let res="";
+                    if (queryData.password.toString() == pass) {
+                        res="success";
+                    } else {
+                        res="Failed";
+                    }
+                    response.write(res);
+                    response.end();
+
+                });
             });
             break;
         case '/new.css': response.writeHead(200, { 'Content-type': 'text/css' });
