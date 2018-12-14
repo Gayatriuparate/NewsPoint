@@ -5,35 +5,24 @@
     <link rel="stylesheet" href="timeline.css">
 </head>
 
-<body>
+<body onload="loadBlog();">
+
     <form>
         <nav>
             <ul style="list-style-type: none">
                 <li class="navbar-title">Home</li>
 
                 <li class="navbar-list">
-                    LogOut
+                        <a href="login.html"> LogOut</a>
 
                 </li>
                 <li class="navbar-list">
-                    My Profile </li>
+                    <a href="profile.html">My Profile</a> </li>
             </ul>
         </nav>
         <hr>
-        <div class="blogContainer">
-            <p>
-                Where does it come from?
-                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-                in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked
-                up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going
-                through the cites of the word in classical literature, discovered the undoubtable source.
-                Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
-                (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
-                theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,
-                "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-            </p>
-        </div>
+        <div id="blogBody"></div>
+        <!-- blog container -->
         <div>
             <footer>
                 <input type="text" placeholder="Enter Title" id='title'></input>
@@ -58,11 +47,11 @@
             if (blogTitle.value != "" || blogDesc.value != "") {
 
                 var oReq = new XMLHttpRequest();
-            oReq.open('POST', '/blogReq', true);
+                oReq.open('POST', '/blogReq', true);
 
                 //Send the proper header information along with the request
                 oReq.setRequestHeader('Content-type', 'test/plain');
-                let params = {userNm:'s', title: blogTitle.value, blogDesc: blogDesc.value }
+                let params = { userNm: 's', title: blogTitle.value, blogDesc: blogDesc.value }
                 oReq.onreadystatechange = function () {//Call a function when the state changes.
                     if (oReq.readyState == 4 && oReq.status == 200) {
                         if (oReq.responseText == "success") {
@@ -80,6 +69,30 @@
             } else {
                 alert("Blog can not be emptily posted.");
             }
+        }
+        function loadBlog() {
+            var oReq = new XMLHttpRequest();
+            oReq.open('POST', '/postReq', true);
+            oReq.setRequestHeader('Content-type', 'test/plain');
+            oReq.onreadystatechange = function () {//Call a function when the state changes.
+                if (oReq.readyState == 4 && oReq.status == 200) {
+                    const result = JSON.parse(oReq.response);
+                    let blogBody = document.getElementById("blogBody");
+                    for (var blono = 0; blono < result.length; blono++) {
+
+                        var blog = document.createElement("div");
+                        blog.className = "blogContainer";
+                        blog.id = 'r${blog}';
+                        let blogdata = `${result[blono].title}:
+                                         ${result[blono].blogDesc}`;
+                        blog.innerText = blogdata;
+                        blogBody.appendChild(blog);
+
+                    }
+                }
+            }
+            oReq.send("hhhh");
+
         }
     </script>
 </body>

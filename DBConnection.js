@@ -36,4 +36,16 @@ let insertBlog = (data) => {
         console.log("Blog Posted !!");
     });
 };
-module.exports = { insertStatement, selectStatement, insertBlog,selectProfile };
+
+
+let selectBlog = (cb) => {
+    var sql = `select title,blogDesc from blog_posts order by id DESC`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        cb(result);
+    });
+};
+
+
+module.exports = { insertStatement, selectStatement, insertBlog,selectProfile,selectBlog};
+
