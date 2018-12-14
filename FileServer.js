@@ -23,6 +23,8 @@ http.createServer(function (request, response) {
             });
             response.end();
             break;
+
+            
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
