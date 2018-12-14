@@ -23,6 +23,17 @@ http.createServer(function (request, response) {
             });
             response.end();
             break;
+
+            case '/blogReq':
+            console.log("in case timeline HTML.");
+            response.writeHead(200, { 'Content-type': 'application/html' });
+            let resultset = mysql.insertBlog(function (result) {
+                console.log("inserted!!!!!" + result);
+            });
+            response.end();
+            break;
+
+    
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
