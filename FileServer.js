@@ -28,12 +28,12 @@ http.createServer(function (request, response) {
             request.on('data', (data) => {
                 let queryData = JSON.parse(data);
                 db.selectStatement(queryData.username, (result) => {
-                    let pass = result[0].password;
-                    let res = "";
-                    if (queryData.password.toString() == pass) {
-                        res = "success";
-                    } else {
-                        res = "Failed";
+                    let res = "Failed";
+                    if (result[0] != undefined) {
+                        let pass = result[0].password;
+                        if (queryData.password.toString() == pass) {
+                            res = "success";
+                        }
                     }
                     response.write(res);
                     response.end();
