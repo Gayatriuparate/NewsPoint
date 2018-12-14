@@ -14,14 +14,21 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
+    let fileName = './login.html'
+    if (request.url.includes(".html")) {
+        fileName = `.${request.url}`;
+    }
     switch (request.url) {
-        case '/user_info':
-            console.log("in case 1");
+        case '/register':
             response.writeHead(200, { 'Content-type': 'application/json' });
-            let resultset = mysql.selectStatement('piya@gmail.com', function (result) {
-                console.log("hhhhhhhhhhhh" + result);
+            request.on('data', (data) => {
+                let registerData = JSON.parse(data)
+                let resultset = db.insertStatement(registerData, function (result) {
+                    console.log("hhhhhhhhhhhh" + result);
+                    response.end();
+                });
+
             });
-            response.end();
             break;
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
@@ -41,6 +48,8 @@ http.createServer(function (request, response) {
                 });
             });
             break;
-        default: getResponse(response, 'text/html', './login.html');
+        default:
+            console.log(fileName);
+            getResponse(response, 'text/html', fileName);
     }
 }).listen(8080);
