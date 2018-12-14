@@ -12,10 +12,11 @@ con.connect(function (err) {
     console.log("Connected!");
 });
 
-let insertStatement = () => {
-    var sql = `INSERT INTO user_info values(null, '${username}','${password}','${email_id}','${mobileNo}','${education}')`;
+let insertStatement = (data,callback) => {
+    var sql = `INSERT INTO user_info values(null, '${data.username}','${data.password}','${data.email_id}','${data.mobileNo}','${data.education}')`;
     con.query(sql, function (err, result) {
         if (err) throw err;
+        callback(result);
         console.log("data added");
     });
 };
@@ -27,4 +28,12 @@ let selectStatement = (email, cb) => {
         cb(result);
     });
 };
-module.exports = { insertStatement, selectStatement };
+
+let insertBlog = () => {
+    var sql = `INSERT INTO blog_posts values(null, '${userNm}','${title}','${blogDesc}')`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Blog Posted !!");
+    });
+};
+module.exports = { insertStatement, selectStatement, insertBlog };
