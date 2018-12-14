@@ -1,1 +1,99 @@
- 
+<html>
+
+<head>
+    <link rel="stylesheet" href="profile.css">
+
+
+    <title>BlogProfile</title>
+</head>
+
+<body>
+
+
+
+    <header>
+        <div id="topbar">
+            <div class="logo">
+                My Profile
+            </div>
+            <nav>
+                <ul>
+                    <a href="timeline.html">Back</a>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="userInfo">
+            <img src="" height=350px  width="350px" alt="Image preview..."><br>
+        <input type="file" onchange="previewFile()">
+    </div>
+
+
+
+<script>
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+  }
+
+  previewFile();  //calls the function named previewFile()
+  </script>
+
+
+
+   
+
+
+
+
+
+    <!-- 
+    <div class="box">
+        <div class="blog-post">
+            <div class="blog-heading">
+                Blog heading
+            </div>
+            <div class="blog-body">
+                <img src="http://howtocodeinhtml.com/img/chapter4/blogpost-preview.png" height="50%" alt="">
+               
+                <p>
+                    Hi there.
+                </p>
+                <article>
+                    <p>My article 1</p>
+                </article>
+
+                <article>
+                    <p>My article 2</p>
+                </article>
+            </div>
+        </div> -->
+    <!-- <div class="sidebar">
+                <ul>
+                    <li>side link 1</li>
+                    <li> side link 2 </li>
+                </ul>
+            </div>
+        </div> -->
+    <!-- <footer>	
+            <div id="footer">
+               foter		
+            </div>
+        </footer> -->
+
+</body>
+
+</html>
