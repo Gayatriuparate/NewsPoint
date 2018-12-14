@@ -5,23 +5,19 @@
     <link rel="stylesheet" href="timeline.css">
 </head>
 
-<<<<<<< HEAD
-<body onload="loading()">
-=======
 <body onload="loadBlog();">
 
->>>>>>> a966fd89e3a3bb54b4d10d2b8408d4e8b893bb79
     <form>
         <nav>
             <ul style="list-style-type: none">
                 <li class="navbar-title">Home</li>
 
                 <li class="navbar-list">
-                        <a href="login.html"> LogOut</a>
+                    <a href="login.html"> LogOut</a>
 
                 </li>
                 <li class="navbar-list">
-                    <a href="profile.html">My Profile</a> </li>
+                    <a href="profile.html" id="usernm"></a> </li>
             </ul>
         </nav>
         <hr>
@@ -40,8 +36,8 @@
     </form>
 
     <script type="text/javascript">
-        function loading(){
-           alert(sessionStorage.getItem("lastname"));
+        function loading() {
+            alert(sessionStorage.getItem("lastname"));
         }
         function insertBlog() {
             let blogTitle = document.getElementById("title");
@@ -73,6 +69,8 @@
             }
         }
         function loadBlog() {
+            let user = sessionStorage.getItem("lastname").toString();
+            document.getElementById("usernm").innerText = user;
             var oReq = new XMLHttpRequest();
             oReq.open('POST', '/postReq', true);
             oReq.setRequestHeader('Content-type', 'test/plain');

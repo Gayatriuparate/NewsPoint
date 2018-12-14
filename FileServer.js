@@ -14,8 +14,18 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
+    let fileName = './login.html'
+    let filetype = 'text/html'
+    if (request.url.includes(".html")) {
+        fileName = `.${request.url}`;
+    } else if (request.url.includes(".css")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/css';
+    } else if (request.url.includes(".js")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/javascript';
+    }
     switch (request.url) {
-<<<<<<< HEAD
         case '/register':
             console.log("in register case");
             response.writeHead(200, { 'Content-type': 'application/json' });
@@ -28,9 +38,6 @@ http.createServer(function (request, response) {
 
             });
             break;
-=======
-  
->>>>>>> a966fd89e3a3bb54b4d10d2b8408d4e8b893bb79
 
         case '/blogReq':
             console.log("in case timeline HTML.");
@@ -42,16 +49,12 @@ http.createServer(function (request, response) {
                 });
 
 
-           
+
 
             });
             response.end();
             break;
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
-<<<<<<< HEAD
-            console.log(request.url);
-=======
->>>>>>> a966fd89e3a3bb54b4d10d2b8408d4e8b893bb79
             request.on('data', (data) => {
                 let queryData = JSON.parse(data);
                 db.selectStatement(queryData.username, (result) => {
@@ -67,12 +70,12 @@ http.createServer(function (request, response) {
 
                 });
             });
-
-            case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            break;
+        case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
                 db.selectStatement(queryData.username, (result) => {
-                    let results=JSON.stringify(result);
+                    let results = JSON.stringify(result);
                     response.write(results);
                     response.end();
 
@@ -84,8 +87,8 @@ http.createServer(function (request, response) {
             request.on('data', (data) => {
                 let resultset1 = db.selectBlog(function (result) {
                     let results = JSON.stringify(result);
-                   response.write(results);
-                   response.end();
+                    response.write(results);
+                    response.end();
                 });
             });
 

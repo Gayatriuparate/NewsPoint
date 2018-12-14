@@ -47,5 +47,5 @@ let selectBlog = (cb) => {
 };
 
 
-module.exports = { insertStatement, selectStatement, insertBlog,selectProfile,selectBlog};
+module.exports = { insertStatement, selectStatement, insertBlog,selectBlog};
 
