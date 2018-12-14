@@ -20,6 +20,13 @@ let insertStatement = (data,callback) => {
         console.log("data added");
     });
 };
+let selectProfile = (email_id, cb) => {
+    var sql = `select * from user_info where email_id='${email_id}'`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        cb(result);
+    });
+};
 
 let selectStatement = (email, cb) => {
     var sql = `select password from user_info where email_id='${email}'`;
