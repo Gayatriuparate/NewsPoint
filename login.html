@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style type="text/css">
+        label {
+            color: black;
+            font-family: Algerian;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        input {
+            display: block;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            font-family: 'Arial Narrow Bold';
+            font-size: 1em;
+            font-weight: bold;
+            color: rgb(255, 255, 229);
+            width: 50%;
+            /* background: url("login.png");*/
+            background-repeat: no-repeat;
+            background-color: dodgerblue;
+        }
+
+        form {
+            position: relative;
+            margin: auto;
+            padding: 5% 20% 50% 20%;
+        }
+
+        fieldset {
+            padding: 10% 20% 10% 20%;
+        }
+
+        body {
+            background-image: radial-gradient(gray, whitesmoke);
+            font-size: 2em;
+        }
+    </style>
 </head>
+
 <body>
-    in
+    <form target="Fileserver.js" method="GET">
+        <fieldset>
+            <legend>Enter Credentials </legend>
+            <label for="username">Username: </label> <input type="text" name="username" id="username" required>
+            <br>
+            <label for="password">Password: </label> <input type="password" name="password" id="password" required>
+            <br>
+            <input type="submit" value="Log In">
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+        function validate() {
+            let username = document.getElementById("username");
+            let password = document.getElementById("password");
+            if (username.value.trim() == "" || password.value.trim() == "") {
+                alert("Username and Password cannot be empty");
+            } else {
+                function reqListener() {
+                    var data = JSON.parse(this.responseText);
+                    console.log(data);
+                }
+
+                function reqError(err) {
+                    console.log('Fetch Error :-S', err);
+                }
+
+                var oReq = new XMLHttpRequest();
+                oReq.onload = reqListener;
+                oReq.onerror = reqError;
+                oReq.open('get', './api/some.json', true);
+                oReq.send();
+            }
+        }
+    </script>
 </body>
+
 </html>
