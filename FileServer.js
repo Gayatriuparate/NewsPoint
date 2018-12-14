@@ -18,19 +18,21 @@ http.createServer(function (request, response) {
     if (request.url.includes(".html")) {
         fileName = `.${request.url}`;
     }
+
     switch (request.url) {
         case '/register':
+            console.log("in register case");
             response.writeHead(200, { 'Content-type': 'application/json' });
             request.on('data', (data) => {
                 let registerData = JSON.parse(data)
                 let resultset = db.insertStatement(registerData, function (result) {
-                    console.log("hhhhhhhhhhhh" + result);
+                    response.write("Registration Successful!!!");
                     response.end();
                 });
 
             });
             break;
-        case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
+          case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
                 let queryData = JSON.parse(data);

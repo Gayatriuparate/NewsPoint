@@ -13,7 +13,7 @@ con.connect(function (err) {
 });
 
 let insertStatement = (data,callback) => {
-    var sql = `INSERT INTO user_info values(null, '${data.username}','${data.password}','${data.email_id}','${data.mobileNo}','${data.education}')`;
+    var sql = `INSERT INTO user_info values(null, '${data.username}','${data.password}','${data.email_id}','${data.mob_no}','${data.edu}')`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         callback(result);

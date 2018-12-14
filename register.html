@@ -78,27 +78,31 @@
     </form>
     <script>
         function validate() {
+
             username = document.getElementById("username");
-            password = document.getElementById("password");
-            psw_repeat = document.getElementById("psw-repeat");
+            password = document.getElementById("psw");
+            psw_repeat = document.getElementById("psw_repeat");
             email_id = document.getElementById("email_id");
-            mob_no = document.getElementById("mob-no");
+            mob_no = document.getElementById("mob_no");
             edu = document.getElementById("edu");
 
             var oReq = new XMLHttpRequest();
             oReq.open('POST', '/register', true);
 
 
-            oReq.setRequestHeader('Content-type', 'multipart/form-data');
-            let params = { username: username.value, password: password.value, email_id: email_id.value, mob: mob_no.value, edu: edu.value }
-            alert(params);
+            oReq.setRequestHeader('Content-type', 'text/plain');
+
+            let params = { username: username.value, password: password.value, email_id: email_id.value, mob_no: mob_no.value, edu: edu.value };
+
             oReq.onreadystatechange = function () {//Call a function when the state changes.
                 if (oReq.readyState == 4 && oReq.status == 200) {
                     alert(oReq.responseText);
+                    window.location = "/login.html";
                 }
-                oReq.send(JSON.stringify(params));
+
 
             }
+            oReq.send(JSON.stringify(params));
 
         }
     </script>
