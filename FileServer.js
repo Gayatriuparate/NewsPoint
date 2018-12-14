@@ -1,5 +1,35 @@
 var http = require('http');
 var fs = require('fs');
+<<<<<<< HEAD
+var mysql = require('./DBConnection');
+
+const getResponse = (response, contentType, fileURL) => {
+    response.writeHead(200, { 'Content-type': contentType });
+    fs.readFile(fileURL, (err, html) => {
+        if (err) {
+            throw err;
+        }
+        response.write(html);
+        response.end();
+    });
+}
+
+http.createServer(function (request, response) {
+    console.log(request.url);
+ switch(request.url){
+    case '/user_info':
+    console.log("in case 1");
+    response.writeHead(200, { 'Content-type': 'application/json' });
+     let resultset = mysql.selectStatement('piya@gmail.com', function (result) {
+        console.log("hhhhhhhhhhhh" + result);
+    });
+    response.end();
+    break;
+    default:
+    console.log("in default case");
+    getResponse(response, 'text/html', './register.html')
+}
+=======
 var url = require('url');
 const db=require('./DBConnection');
 
@@ -44,4 +74,5 @@ http.createServer(function (request, response) {
                 response.end();
             });
     }
+>>>>>>> 6d6ee4f06963769cca6663d9e2c9f2447b7dfe57
 }).listen(8080);
