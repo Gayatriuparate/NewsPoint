@@ -14,8 +14,30 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
+    let fileName = './login.html'
+    let filetype = 'text/html'
+    if (request.url.includes(".html")) {
+        fileName = `.${request.url}`;
+    } else if (request.url.includes(".css")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/css';
+    } else if (request.url.includes(".js")) {
+        fileName = `.${request.url}`;
+        filetype = 'text/javascript';
+    }
     switch (request.url) {
-  
+        case '/register':
+            console.log("in register case");
+            response.writeHead(200, { 'Content-type': 'application/json' });
+            request.on('data', (data) => {
+                let registerData = JSON.parse(data)
+                let resultset = db.insertStatement(registerData, function (result) {
+                    response.write("Registration Successful!!!");
+                    response.end();
+                });
+
+            });
+            break;
 
         case '/blogReq':
             console.log("in case timeline HTML.");
@@ -27,7 +49,7 @@ http.createServer(function (request, response) {
                 });
 
 
-           
+
 
             });
             response.end();
@@ -48,12 +70,12 @@ http.createServer(function (request, response) {
 
                 });
             });
-
-            case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            break;
+        case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
                 db.selectStatement(queryData.username, (result) => {
-                    let results=JSON.stringify(result);
+                    let results = JSON.stringify(result);
                     response.write(results);
                     response.end();
 
@@ -65,8 +87,8 @@ http.createServer(function (request, response) {
             request.on('data', (data) => {
                 let resultset1 = db.selectBlog(function (result) {
                     let results = JSON.stringify(result);
-                   response.write(results);
-                   response.end();
+                    response.write(results);
+                    response.end();
                 });
             });
 

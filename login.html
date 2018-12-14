@@ -44,11 +44,12 @@
             background-image: radial-gradient(gray, whitesmoke);
             font-size: 2em;
         }
+
         .signin {
-           
+
             padding: 1% 4% 1% 4%;
             margin: 0% 0% 0% 45%;
-            font-size:20px;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -57,7 +58,7 @@
     <form>
         <fieldset>
             <legend>Enter Credentials </legend>
-            <label for="username">Username: </label> <input type="text" name="username" id="username" required>
+            <label for="username">Email_Id: </label> <input type="text" name="username" id="username" required>
             <br>
             <label for="password">Password: </label> <input type="password" name="password" id="password" required>
             <br>
@@ -84,10 +85,7 @@
                 oReq.onreadystatechange = function () {//Call a function when the state changes.
                     if (oReq.readyState == 4 && oReq.status == 200) {
                         if (oReq.responseText == "success") {
-                            sessionStorage.username = username;
-                            //                             sessionStorage.getItem("SessionName") and
-
-                            // sessionStorage.setItem("SessionName","SessionData")
+                            sessionStorage.setItem("lastname", username.value.toString());
                             window.location = "/timeline.html";
                         } else {
                             alert("Invalid username or password");
