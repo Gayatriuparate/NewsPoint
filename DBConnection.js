@@ -29,6 +29,17 @@ let selectStatement = (email, cb) => {
     });
 };
 
+
+let selectProfile = (email_id, cb) => {
+    var sql = `select * from user_info where email_id='${email_id}'`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        cb(result);
+    });
+};
+
+
+
 let insertBlog = () => {
     var sql = `INSERT INTO blog_posts values(null, '${userNm}','${title}','${blogDesc}')`;
     con.query(sql, function (err, result) {
@@ -36,4 +47,4 @@ let insertBlog = () => {
         console.log("Blog Posted !!");
     });
 };
-module.exports = { insertStatement, selectStatement, insertBlog };
+module.exports = { insertStatement, selectStatement, insertBlog,selectUsername,selectMobileNo, selectEducation };

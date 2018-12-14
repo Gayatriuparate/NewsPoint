@@ -14,33 +14,15 @@ const getResponse = (response, contentType, fileURL) => {
 }
 
 http.createServer(function (request, response) {
-    let fileName = './login.html'
-    if (request.url.includes(".html")) {
-        fileName = `.${request.url}`;
-    }
     switch (request.url) {
-        case '/register':
+        case '/user_info':
+            console.log("in case 1");
             response.writeHead(200, { 'Content-type': 'application/json' });
-            request.on('data', (data) => {
-                let registerData = JSON.parse(data)
-                let resultset = db.insertStatement(registerData, function (result) {
-                    console.log("hhhhhhhhhhhh" + result);
-                    response.end();
-                });
-
-            });
-            break;
-
-            case '/blogReq':
-            console.log("in case timeline HTML.");
-            response.writeHead(200, { 'Content-type': 'application/html' });
-            let resultset = mysql.insertBlog(function (result) {
-                console.log("inserted!!!!!" + result);
+            let resultset = mysql.selectStatement('piya@gmail.com', function (result) {
+                console.log("hhhhhhhhhhhh" + result);
             });
             response.end();
             break;
-
-    
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
             console.log(request.url);
             request.on('data', (data) => {
@@ -58,9 +40,18 @@ http.createServer(function (request, response) {
 
                 });
             });
+
+            case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
+            console.log(request.url);
+            request.on('data', (data) => {
+                db.selectStatement(queryData.username, (result) => {
+                    let results=JSON.stringify(result);
+                    response.write(results);
+                    response.end();
+
+                });
+            });
             break;
-        default:
-            console.log(fileName);
-            getResponse(response, 'text/html', fileName);
+        default: getResponse(response, 'text/html', './login.html');
     }
 }).listen(8080);
