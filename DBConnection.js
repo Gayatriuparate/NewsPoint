@@ -13,7 +13,7 @@ con.connect(function (err) {
 });
 
 let insertStatement = (data,callback) => {
-    var sql = `INSERT INTO user_info values(null, '${data.username}','${data.password}','${data.email_id}','${data.mobileNo}','${data.education}')`;
+    var sql = `INSERT INTO user_info values(null, '${data.username}','${data.password}','${data.email_id}','${data.mob_no}','${data.edu}')`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         callback(result);
@@ -37,6 +37,7 @@ let insertBlog = (data) => {
     });
 };
 
+
 let selectBlog = (cb) => {
     var sql = `select title,blogDesc from blog_posts order by id DESC`;
     con.query(sql, function (err, result) {
@@ -44,4 +45,7 @@ let selectBlog = (cb) => {
         cb(result);
     });
 };
-module.exports = { insertStatement, selectStatement, insertBlog,selectBlog };
+
+
+module.exports = { insertStatement, selectStatement, insertBlog,selectProfile,selectBlog};
+

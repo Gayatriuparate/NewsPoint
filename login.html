@@ -79,7 +79,7 @@
                 oReq.open('POST', '/valReq', true);
 
                 //Send the proper header information along with the request
-                oReq.setRequestHeader('Content-type', 'test/plain');
+                oReq.setRequestHeader('Content-type', 'text/plain');
                 let params = { username: username.value, password: password.value }
                 oReq.onreadystatechange = function () {//Call a function when the state changes.
                     if (oReq.readyState == 4 && oReq.status == 200) {
