@@ -47,13 +47,13 @@ http.createServer(function (request, response) {
                 let resultset = db.insertBlog(registerData, function (result) {
                     console.log("inserted!!!!!" + result);
                 });
+
             });
             response.end();
             break;
 
 
         case '/valReq': response.writeHead(200, { 'Content-type': 'text/javascript' });
-            console.log(request.url);
             request.on('data', (data) => {
                 let queryData = JSON.parse(data);
                 db.selectStatement(queryData.username, (result) => {
@@ -70,8 +70,18 @@ http.createServer(function (request, response) {
                 });
             });
             break;
+
+        case '/postReq': response.writeHead(200, { 'Content-type': 'text/plain' });
+            request.on('data', (data) => {
+                let resultset1 = db.selectBlog(function (result) {
+                    let results = JSON.stringify(result);
+                   response.write(results);
+                   response.end();
+                });
+            });
+
+            break;
         default:
-            console.log(fileName);
             getResponse(response, filetype, fileName);
     }
 }).listen(8080);
