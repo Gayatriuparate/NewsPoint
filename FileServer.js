@@ -12,7 +12,6 @@ const getResponse = (response, contentType, fileURL) => {
         response.end();
     });
 }
-
 http.createServer(function (request, response) {
     let fileName = './login.html'
     let filetype = 'text/html'
@@ -71,10 +70,10 @@ http.createServer(function (request, response) {
                 });
             });
             break;
-        case '/profile': response.writeHead(200, { 'Content-type': 'text/javascript' });
+        case '/profile': response.writeHead(200, { 'Content-type': 'text/plain' });
             console.log(request.url);
             request.on('data', (data) => {
-                db.selectStatement(queryData.username, (result) => {
+                db.selectProfile(function (result){
                     let results = JSON.stringify(result);
                     response.write(results);
                     response.end();
@@ -88,6 +87,17 @@ http.createServer(function (request, response) {
                 let resultset1 = db.selectBlog(function (result) {
                     let results = JSON.stringify(result);
                     response.write(results);
+                    response.end();
+                });
+            });
+
+            break;
+
+            case '/profileReq': response.writeHead(200, { 'Content-type': 'text/plain' });
+            request.on('data', (data) => {
+                let resultset = db.selectProfile(function (result) {
+                    let results = JSON.stringify(result);
+                    console.log(results);
                     response.end();
                 });
             });
