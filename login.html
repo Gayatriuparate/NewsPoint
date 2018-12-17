@@ -75,10 +75,7 @@
                 oReq.onreadystatechange = function () {//Call a function when the state changes.
                     if (oReq.readyState == 4 && oReq.status == 200) {
                         if (oReq.responseText == "success") {
-                            sessionStorage.username = username;
-                            //                             sessionStorage.getItem("SessionName") and
-
-                            // sessionStorage.setItem("SessionName","SessionData")
+                            sessionStorage.setItem("lastname", username.value.toString());
                             window.location = "/timeline.html";
                         } else {
                             alert("Invalid username or password");
