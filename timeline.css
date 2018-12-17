@@ -1,59 +1,55 @@
-.navbar-list{
-    padding-right: 20px;
-    margin-right: 20px;
-    margin-top: 15px;
-    background-color: #fff;
+nav ul li{
     border-style: none;
-    font-size: 22px;
-    font-family: 'monospace';
-    color: dimgray;
-    align-content: center;
-    float: right;
-    
-}
-.navbar-title{
-    padding-right: 20px;
-    margin-right: 20px;
-    margin-top: 15px;
-    background-color: #fff;
-    border-style: none;
-    font-size: 22px;
-    font-family: 'monospace';
-    color: dimgray;
+    font-size: 20px;
+    font-family: Impact;
+    font-weight: bold;
     align-content: center;
     float: left;
-    
+    width:5%;
+}
+nav ul{
+    padding: 0% 1% 1% 1% ;
+    color: white;   
+}
+nav ul li:first-child{
+    border-style: none;
+    font-size: 22px;
+    font-family: 'monospace';
+    align-content: center;
+    float: left;
+    width:81%;
+}
+header{
+  position: fixed;
+  top: 0;
+   background-color: gray;
+   width: 100%;
 }
 footer{
-    position:fixed;
-    bottom:20;
-    left:50;
+    position: fixed ;
+    padding: 1% 1% 1% 1%;
+    bottom:0% ;
+    width: 100%;
+    background-color: gray;
   }
-
+#blogBody{
+    top:12%;
+    overflow:auto;
+    float:left;
+    position: fixed;
+    height: 50vh;
+    width:100%;
+}
   .blogContainer{
-      position: relative;
-      top: 30px;
-      margin-left: 60px;
-      padding-bottom:20px; 
-      width: 1250px;
-      overflow-y: scroll;
-    
+      overflow-y: auto; 
+      width: 100% ;
   }
 
-  hr {
-    position: absolute;
-    left: 0;
-    top:60px;
-    width: 1300px;
-    margin-right: 2%;
-    margin-left: 2%;
-  }
 
   input[type="button"] {
     position:absolute;
-    top: -10px;
-    right:3px;
     width: 60px;
+    right: 30%;
     height: 30px;
     float: right;
 }
@@ -61,8 +57,6 @@ input[type="text"]{
     position:absolute;
     width: 570px;
     height: 40px;
-    top: -10px;
-    left:3px;
     font-family: monospace;
     font-size: 20px;
     color: black;
@@ -78,3 +72,22 @@ textarea {
     color: black;
     
 }
+a:link {
+    color:rgb(139, 235, 139);
+    text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(139, 235, 139);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: red;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  }
