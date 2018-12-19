@@ -24,112 +24,89 @@
             </nav>
         </div>
     </header>
-    <!-- <div id="profileBodyID">userdisplayed</div> -->
-    <div class="divstyle">
+
+    <!-- <div class="divstyle"> -->
 
 
-<section>
-        <div id="logo">
-            <img src="/home/synerzip/blogProject/NewsPoint/login.png" style="float: left;" width="200px" height="200px" alt="">
-        </div>
 
 
-        <!-- <p rows="10" id='blog'></p> -->
-         <div class="container">
+    <div class="container">
         <div class="innerdiv">
+            <label style="padding-right:3em;"> User Name</label>
             <label for="username" id="username"></label>
         </div>
 
 
 
         <div class="innerdiv">
+            <label style="padding-right:4em;"> Email Id </label>
             <label for="email_id" id="email_id">emailid</label>
         </div>
 
 
 
         <div class="innerdiv">
+            <label style="padding-right:3em;"> Mobile No</label>
             <label for="mob_no" id="mob_no">MobileNo</label>
         </div>
 
 
 
         <div>
-            <label for="edu" id="edu">Education</label>
+            <label style="padding-right:3.5em;"> Education</label>
+            <label style="padding-left:2em;" for="edu" id="edu"></label>
         </div>
-    </div>
-</section>
-
-
-    <script type="text/javascript">
-
-        function loading() {
-            alert(sessionStorage.getItem("lastname"));
-        }
 
 
 
-        function loadEvent() {
-            let user = sessionStorage.getItem("lastname").toString();
-            document.getElementById("username").innerText = user;
-            var oReq = new XMLHttpRequest();
-            oReq.open('POST', "/profile", true);
+
+        <script type="text/javascript">
+
+            function loading() {
+                alert(sessionStorage.getItem("lastname"));
+            }
 
 
-            oReq.setRequestHeader('Content-type', 'test/plain');
-            oReq.onreadystatechange = function () {//Call a function when the state changes.
-                if (oReq.readyState == 4 && oReq.status == 200) {
-                    const result = JSON.parse(oReq.response);
-                    let blogBody = document.getElementById("profileBodyID");
-                    console.log(oReq.response);
-                    var a = JSON.stringify(result);
-                    console.log(result);
-                    
-                    // for (var blono = 0; blono < result.length; blono++) {
+
+            function loadEvent() {
+                let user = sessionStorage.getItem("lastname").toString();
+                document.getElementById("username").innerText = user;
+                var oReq = new XMLHttpRequest();
+                oReq.open('POST', "/profile", true);
+
+
+                oReq.setRequestHeader('Content-type', 'test/plain');
+                oReq.onreadystatechange = function () {//Call a function when the state changes.
+                    if (oReq.readyState == 4 && oReq.status == 200) {
+                        const result = JSON.parse(oReq.response);
+                        let blogBody = document.getElementById("profileBodyID");
+                        var res = oReq.response;
+
+                        var txt = "";
+                        var txt1 = "";
+
+                        console.log(result)
+
+                        txt = result[0].mobileNo;
+                        txt1 = result[0].email_id;
+                        txt3 = result[0].education;
+
+                        document.getElementById("mob_no").innerHTML = txt;
+                        document.getElementById("email_id").innerHTML = txt1;
+                        document.getElementById("edu").innerHTML = txt3;
 
                         var blog = document.createElement("div");
-                       // console.log(result[0].email_id);
-                       // blog.className = "blogContainer";
-                        //blog.id = 'r${blog}';
-                        // let blogdata = `${result[blono].title}:
-                //  ${result[blono].blogDesc}`;
-                        // blog.innerText = blogdata;
-                        // blogBody.appendChild(blog);
 
+
+
+                    }
 
                 }
-
+                oReq.send("sddh");
             }
-            oReq.send("sddh");
-        }
 
 
-        // function loadBlog() {
-        //     let user = sessionStorage.getItem("lastname").toString();
-        //     document.getElementById("usernm").innerText = user;
-        //     var oReq = new XMLHttpRequest();
-        //     oReq.open('POST', '/postReq', true);
-        //     oReq.setRequestHeader('Content-type', 'test/plain');
-        //     oReq.onreadystatechange = function () {//Call a function when the state changes.
-        //         if (oReq.readyState == 4 && oReq.status == 200) {
-        //             const result = JSON.parse(oReq.response);
-        //             let blogBody = document.getElementById("blogBody");
-        //             for (var blono = 0; blono < result.length; blono++) {
 
-        //                 var blog = document.createElement("div");
-        //                 blog.className = "blogContainer";
-        //                 blog.id = 'r${blog}';
-        //                 let blogdata = `${result[blono].title}:
-        //                                  ${result[blono].blogDesc}`;
-        //                 blog.innerText = blogdata;
-        //                 blogBody.appendChild(blog);
-
-        //             }
-        //         }
-        //     }
-        //     oReq.send("hhhh");
-
-        // }
 
 
 
@@ -152,24 +129,9 @@
         // }
 
         // previewFile();  //calls the function named previewFile()
-    </script>
+        </script>
 
 
-
-
-
-    <!-- <div class="sidebar">
-                <ul>
-                    <li>side link 1</li>
-                    <li> side link 2 </li>
-                </ul>
-            </div>
-        </div> -->
-    <!-- <footer>	
-            <div id="footer">
-               foter		
-            </div>
-        </footer> -->
 
 </body>
 
