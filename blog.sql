@@ -16,9 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `blog_posts`
+--
+
+DROP TABLE IF EXISTS `blog_posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `blog_posts` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `userNm` varchar(20) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `blogDesc` mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_posts`
+--
+
+LOCK TABLES `blog_posts` WRITE;
+/*!40000 ALTER TABLE `blog_posts` DISABLE KEYS */;
+INSERT INTO `blog_posts` VALUES (1,'s','q3wrwqerew','awfrafa'),(2,'s','sgsegs','sxgxdgxgxfg'),(3,'s','56575','dydyhfdhfh'),(4,'s','56575','dydyhfdhfh'),(5,'s','werefsd','asfdsfdxvfxbg  tsets es'),(6,'s','ewre','fgf'),(7,'s','hey hello...','hi'),(8,'s','my first blog','hey I am here ..'),(9,'s','rahul blog','hi this is my first blog\ni am very glad to have this facility\nthank you very much..\nbye..');
+/*!40000 ALTER TABLE `blog_posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_info`
 --
-create database blog_db;
 
 DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -40,6 +65,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT INTO `user_info` VALUES (1,'s','s','s','63847230','be');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +78,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-13 15:50:23
+-- Dump completed on 2018-12-14 19:55:21

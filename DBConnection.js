@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+var db = require('mysql');
 
-var con = mysql.createConnection({
+var con = db.createConnection({
     host: "localhost",
     user: "root",
     password: "root",
@@ -45,7 +45,14 @@ let selectBlog = (cb) => {
         cb(result);
     });
 };
+let selectProfile = (username) => {
+    var sql = `select username,email_id,mobileNo,education from user_info order by id DESC`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        username(result);
+    });
+};
 
 
-module.exports = { insertStatement, selectStatement, insertBlog,selectBlog};
+module.exports = { insertStatement, selectStatement, insertBlog,selectBlog, selectProfile};
 

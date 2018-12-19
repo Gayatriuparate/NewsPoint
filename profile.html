@@ -12,7 +12,6 @@
 <body onload="loadEvent();">
 
 
-
     <header>
         <div id="topbar">
             <div class="logo">
@@ -21,30 +20,58 @@
             <nav>
                 <ul>
                     <a href="timeline.html">Back</a>
-
                 </ul>
             </nav>
         </div>
     </header>
-    <div class="userInfo">
-        <img src="" height=350px width="350px" alt="Image preview..."><br>
-        <input type="file" onchange="previewFile()">
+    <!-- <div id="profileBodyID">userdisplayed</div> -->
+    <div class="divstyle">
+
+
+<section>
+        <div id="logo">
+            <img src="/home/synerzip/blogProject/NewsPoint/login.png" style="float: left;" width="200px" height="200px" alt="">
+        </div>
+
+
+        <!-- <p rows="10" id='blog'></p> -->
+         <div class="container">
+        <div class="innerdiv">
+            <label for="username" id="username"></label>
+        </div>
+
+
+
+        <div class="innerdiv">
+            <label for="email_id" id="email_id">emailid</label>
+        </div>
+
+
+
+        <div class="innerdiv">
+            <label for="mob_no" id="mob_no">MobileNo</label>
+        </div>
+
+
+
+        <div>
+            <label for="edu" id="edu">Education</label>
+        </div>
     </div>
-    <div>
-        <label for="username" id="username">username</label>
-        <label for="email_id" id="email_id">emailid</label>
-        <label for="mob_no" id="mob_no">MobileNo</label>
-        <label for="edu" id="edu">Education</label>
+</section>
 
 
-    </div>
+    <script type="text/javascript">
+
+        function loading() {
+            alert(sessionStorage.getItem("lastname"));
+        }
 
 
 
-    <script>
-        let body = document.getElementsByTagName("body");
         function loadEvent() {
-
+            let user = sessionStorage.getItem("lastname").toString();
+            document.getElementById("username").innerText = user;
             var oReq = new XMLHttpRequest();
             oReq.open('POST', "/profile", true);
 
@@ -52,34 +79,79 @@
             oReq.setRequestHeader('Content-type', 'test/plain');
             oReq.onreadystatechange = function () {//Call a function when the state changes.
                 if (oReq.readyState == 4 && oReq.status == 200) {
+                    const result = JSON.parse(oReq.response);
+                    let blogBody = document.getElementById("profileBodyID");
                     console.log(oReq.response);
+                    var a = JSON.stringify(result);
+                    console.log(result);
+                    
+                    // for (var blono = 0; blono < result.length; blono++) {
+
+                        var blog = document.createElement("div");
+                       // console.log(result[0].email_id);
+                       // blog.className = "blogContainer";
+                        //blog.id = 'r${blog}';
+                        // let blogdata = `${result[blono].title}:
+                //  ${result[blono].blogDesc}`;
+                        // blog.innerText = blogdata;
+                        // blogBody.appendChild(blog);
+
+
                 }
+
             }
-            oReq.send("s");
+            oReq.send("sddh");
         }
 
 
+        // function loadBlog() {
+        //     let user = sessionStorage.getItem("lastname").toString();
+        //     document.getElementById("usernm").innerText = user;
+        //     var oReq = new XMLHttpRequest();
+        //     oReq.open('POST', '/postReq', true);
+        //     oReq.setRequestHeader('Content-type', 'test/plain');
+        //     oReq.onreadystatechange = function () {//Call a function when the state changes.
+        //         if (oReq.readyState == 4 && oReq.status == 200) {
+        //             const result = JSON.parse(oReq.response);
+        //             let blogBody = document.getElementById("blogBody");
+        //             for (var blono = 0; blono < result.length; blono++) {
+
+        //                 var blog = document.createElement("div");
+        //                 blog.className = "blogContainer";
+        //                 blog.id = 'r${blog}';
+        //                 let blogdata = `${result[blono].title}:
+        //                                  ${result[blono].blogDesc}`;
+        //                 blog.innerText = blogdata;
+        //                 blogBody.appendChild(blog);
+
+        //             }
+        //         }
+        //     }
+        //     oReq.send("hhhh");
+
+        // }
 
 
-        function previewFile() {
-            var preview = document.querySelector('img'); //selects the query named img
-            var file = document.querySelector('input[type=file]').files[0]; //sames as here
-            var reader = new FileReader();
+
+        // function previewFile() {
+        //     var preview = document.querySelector('img'); //selects the query named img
+        //     var file = document.querySelector('input[type=file]').files[0]; //sames as here
+        //     var reader = new FileReader();
 
 
 
-            if (file) {
-                reader.readAsDataURL(file); //reads the data as a URL
-            } else {
-                preview.src = "";
-            }
-            reader.onloadend = function () {
-                preview.src = reader.result;
-            }
+        //     if (file) {
+        //         reader.readAsDataURL(file); //reads the data as a URL
+        //     } else {
+        //         preview.src = "";
+        //     }
+        //     reader.onloadend = function () {
+        //         preview.src = reader.result;
+        //     }
 
-        }
+        // }
 
-        previewFile();  //calls the function named previewFile()
+        // previewFile();  //calls the function named previewFile()
     </script>
 
 
